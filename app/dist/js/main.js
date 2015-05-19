@@ -239,7 +239,7 @@ var React = require('react');
 
 React.render(
   React.createElement(APP, null),
-  document.getElementById('main'));
+  document.getElementById('app'));
 
 
 },{"./components/app":6,"react":170}],11:[function(require,module,exports){
