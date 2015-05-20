@@ -2,15 +2,19 @@
 var React = 		require('react'),
 	AppActions = 	require('../actions/app-actions.js'),
 	Catalog = 		require('../components/app-catalog.js'),
-	Cart = 		require('../components/app-cart.js');
+	List = 			require('../components/app-list.js');
+	Navigation = 	require('../components/app-navigation.js');
 
 var APP = React.createClass({
 
 	render:function(){
 		return (
 			<div>
-				<Catalog />
-				<Cart />
+				<div className="list container">
+					<Catalog />
+					<List />
+				</div>
+				<Navigation />
 			</div>
 		)
 	}

@@ -6,20 +6,21 @@ var EventEmitter = require('events').EventEmitter;
 var Firebase     = require('firebase');
 var _           = require('lodash');
 
-
-var storyCount = 35;
-
-
 var CHANGE_EVENT = "change";
 
 
+
+
+
+
+
+
+
+
+var storyCount = 35;
 var fb ='https://hacker-news.firebaseio.com/v0/';
 var topstories =  new Firebase( fb + 'topstories');
-
-
 var _stories = [];
-
-
 
 var loadStory = function(ids){
     var newsItem = 'https://hacker-news.firebaseio.com/v0/item/',
@@ -50,6 +51,17 @@ var getData = function(){
   })
 }
 getData();
+
+
+
+
+
+
+
+
+
+
+
 
 
 var _catalog = [
