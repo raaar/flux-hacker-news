@@ -8,9 +8,9 @@ var List = 			require('../components/app-list.js');
 
 var SavedList = 			require('../components/app-savedlist.js');
 
-
-//var Router = require('react-router'); // or var Router = ReactRouter; in browsers
-
+var Router = require('react-router');
+var Link = Router.Link;
+var RouteHandler = Router.RouteHandler;
 
 
 var App = React.createClass({
@@ -21,9 +21,10 @@ var App = React.createClass({
 					<h1>Hacker News</h1>
 				</header>
 				<div className="list container">
-					<SavedList />
 
-					<List />
+			        {/* this is the important part */}
+        			<RouteHandler/>
+					
 				</div>
 
 				<Navigation />

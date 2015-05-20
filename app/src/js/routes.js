@@ -1,22 +1,22 @@
-/** @jsx React.DOM */
 var React = require('react');
 
-var List = 			require('./components/app-list.js');
-var Catalog = 		require('./components/app-catalog.js');
+var App = require('./components/App'),
+	List = 			require('./components/app-list.js'),
+	SavedList = 			require('./components/app-savedlist.js');
 
-
-var Router = require('react-router'); // or var Router = ReactRouter; in browsers
+var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
 
-var routes = {(
+var routes = (
   <Route name="app" path="/" handler={App}>
-    <Route name="saved" handler={Catalog}/>
+    <Route name="home" handler={List}/>
+    <Route name="saved" handler={SavedList}/>
     <DefaultRoute handler={List}/>
   </Route>
-)};
+);
 
 module.exports = routes;

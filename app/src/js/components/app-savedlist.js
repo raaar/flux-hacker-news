@@ -30,12 +30,9 @@ var List = React.createClass({
 		})
 		
 		return (
-			<div>
-				<h2>Saved</h2>
-				<ul>
-					{items}
-				</ul>
-			</div>
+			<ul>
+				{items}
+			</ul>
 		)
 	}
 })
