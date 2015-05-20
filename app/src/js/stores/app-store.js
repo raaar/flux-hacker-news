@@ -7,6 +7,8 @@ var Firebase     = require('firebase');
 var _           = require('lodash');
 
 
+var storyCount = 35;
+
 
 var CHANGE_EVENT = "change";
 
@@ -15,16 +17,36 @@ var fb ='https://hacker-news.firebaseio.com/v0/';
 var topstories =  new Firebase( fb + 'topstories');
 
 
-var ids;
 var _stories = [];
 
 
+
+var loadStory = function(ids){
+    var newsItem = 'https://hacker-news.firebaseio.com/v0/item/',
+      stories = [];
+
+    ids.forEach(function (id){
+      var currentItem = new Firebase (newsItem + id);
+      currentItem.once('value', function(snap){
+
+        _stories.push(snap.val());
+        AppStore.emitChange();
+
+      })
+    })
+}
+
 var getData = function(){
+  var items = [];
+  var topIds = [];
+
   topstories.once('value', function (snap){
     snap.forEach(function (itemSnap){
-      _stories.push(itemSnap.val());
+      items.push(itemSnap.val());
     })
-    AppStore.emitChange();
+    topIds = _.take(items, storyCount);
+
+    loadStory(topIds)
   })
 }
 getData();
