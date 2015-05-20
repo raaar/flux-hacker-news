@@ -5,20 +5,24 @@ var React = require('react'),
 
 
 function getCatalog(){
-	return {items: AppStore.getCatalog()}
+	return {items: AppStore.getStories()}
 }
 
 
 var Catalog = React.createClass({
 	getInitialState: function(){
+		return {items: []};
+	},
+	componentDidMount: function(){
 		return getCatalog();
 	},
-	render: function(){
 
+	render: function(){
+		console.log(this.state.items)
 		var items = this.state.items.map(function(item){
 			return (
 				<li>{item.title} <AddToCart item={item}/></li>
-				)
+			)
 		})
 		
 		return (

@@ -5,8 +5,11 @@ var React = require('react'),
 
 
 function cartItems(){
-	return {items: AppStore.getCart()}
+	return {items: AppStore.getStories()}
 }
+
+
+
 
 
 var Cart = React.createClass({
@@ -20,7 +23,7 @@ var Cart = React.createClass({
 		this.setState(cartItems())
 	},
 	render: function(){
-
+		console.log(this.state.items)
 		var items = this.state.items.map(function(item, i){
 			return (
 				<li>{item.title}  <RemoveFromCart index={i} /></li>

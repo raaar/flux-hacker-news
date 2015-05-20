@@ -3,7 +3,31 @@ var AppConstants = require('../constants/app-constants');
 var assign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
 
+var Firebase     = require('firebase');
+var _           = require('lodash');
+
+
+
 var CHANGE_EVENT = "change";
+
+
+var fb ='https://hacker-news.firebaseio.com/v0/';
+var topstories =  new Firebase( fb + 'topstories');
+
+
+var ids;
+var _stories = [];
+
+
+var getData = function(){
+  topstories.once('value', function (snap){
+    snap.forEach(function (itemSnap){
+      _stories.push(itemSnap.val());
+    })
+    AppStore.emitChange();
+  })
+}
+getData();
 
 
 var _catalog = [
@@ -13,6 +37,8 @@ var _catalog = [
   ];
 
 var _cartItems = [];
+
+
 
 
 function _removeItem(index){
@@ -49,6 +75,8 @@ function _addItem(item){
   }
 }
 
+
+
 			   
 var AppStore = assign({}, EventEmitter.prototype, {
   emitChange:function(){
@@ -68,8 +96,15 @@ var AppStore = assign({}, EventEmitter.prototype, {
   },
 
   getCatalog:function(){
-    return _catalog
+    return _stories
   },
+
+  getStories:function(){
+    return _stories
+  },
+
+
+
 
   dispatcherIndex:AppDispatcher.register(function(payload){
     var action = payload.action; // this is our action from handleViewAction

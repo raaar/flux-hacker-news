@@ -15,7 +15,13 @@ var	AppActions = {
 			actionType: AppConstants.REMOVE_ITEM,
 			index: index
 		})
-	}
+	},
+	userAuthenticated: function(person) {
+	    AppDispatcher.handleViewAction({
+	      actionType: YoConstants.YO_USER_AUTHENTICATED,
+	      item: item
+	    });
+	},
 }
 
 module.exports = AppActions;
