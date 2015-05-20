@@ -2,23 +2,34 @@
 var React = 		require('react'),
 	AppActions = 	require('../actions/app-actions.js'),
 	Catalog = 		require('../components/app-catalog.js'),
-	List = 			require('../components/app-list.js');
 	Navigation = 	require('../components/app-navigation.js');
+var List = 			require('../components/app-list.js');
 
-var APP = React.createClass({
 
+var SavedList = 			require('../components/app-savedlist.js');
+
+
+//var Router = require('react-router'); // or var Router = ReactRouter; in browsers
+
+
+
+var App = React.createClass({
 	render:function(){
 		return (
 			<div>
+				<header>
+					<h1>Hacker News</h1>
+				</header>
 				<div className="list container">
-					<Catalog />
+					<SavedList />
+
 					<List />
 				</div>
+
 				<Navigation />
 			</div>
 		)
 	}
 })
 
-
-module.exports = APP;
+module.exports = App;

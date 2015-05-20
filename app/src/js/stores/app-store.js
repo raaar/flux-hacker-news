@@ -21,6 +21,23 @@ var storyCount = 35;
 var fb ='https://hacker-news.firebaseio.com/v0/';
 var topstories =  new Firebase( fb + 'topstories');
 var _stories = [];
+var _saved = JSON.parse(localStorage.savedStorage);
+
+/*
+var loadSaved = function(){
+    if(localStorage.favouritesStorage){ 
+        _saved = JSON.parse(localStorage.savedStorage);
+        console.log(_saved)
+        AppStore.emitChange();
+    } 
+}
+
+loadSaved();
+*/
+
+//console.log(_saved)
+
+
 
 var loadStory = function(ids){
     var newsItem = 'https://hacker-news.firebaseio.com/v0/item/',
@@ -95,18 +112,12 @@ function _decreaseItem(index){
 
 
 function _addItem(item){
-  if(!item.inCart){
-    item['qty'] = 1;
-    item['inCart'] = true;
-    _cartItems.push(item);
-  }
-  else {
-    _cartItems.forEach(function(cartItem, i){
-      if(cartItem.id===item.id){
-        _increaseItem(i);
-      }
-    });
-  }
+
+    var oldSaved = _saved;
+    oldSaved.push(item);
+
+    _saved = _.uniq(oldSaved, 'title');
+    localStorage.setItem('savedStorage', JSON.stringify(_saved))
 }
 
 
@@ -136,7 +147,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
   getStories:function(){
     return _stories
   },
-
+  getSaved: function(){
+    return _saved
+  },
 
 
 
