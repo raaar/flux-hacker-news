@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 var React = require('react'),
-	AppStore = require('../stores/app-store.js');
-var AppActions = require('../actions/app-actions.js');
-
+	AppStore = require('../stores/app-store.js'),
+ 	AppActions = require('../actions/app-actions.js'),
+ 	Hammer = require('../../bower/hammer.js/hammer.js');
 
 var ListItem = React.createClass({
 
@@ -17,7 +17,6 @@ var ListItem = React.createClass({
 			AppActions.removeItem(this.props.item);
 			item.setAttribute('class', 'item-inner removed');
 		}
-
 	},
 	
 	parseUrl: function(url){
@@ -58,8 +57,7 @@ var ListItem = React.createClass({
 				<div ref="item" className="item-inner" >
 					<h3>{this.props.item.title}</h3>
 					<p>{this.parseUrl(this.props.item.url)}</p>
-					<a ref="itemLink" href={this.props.item.url} target="_blank" ></a> 
-
+					<a ref="itemLink" href={this.props.item.url} target="_blank" ></a>
 				</div>
 				<a ref="saveDeleteButton" className="button" onClick={this.editFavourites}></a>
 			</li>

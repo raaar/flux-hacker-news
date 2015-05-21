@@ -1,16 +1,13 @@
 /** @jsx React.DOM */
 var React = 		require('react'),
 	AppActions = 	require('../actions/app-actions.js'),
-	Catalog = 		require('../components/app-catalog.js'),
+ 	List = 			require('../components/app-list.js'),
+ 	SavedList = 			require('../components/app-savedlist.js'),
 	Navigation = 	require('../components/app-navigation.js');
-var List = 			require('../components/app-list.js');
 
-
-var SavedList = 			require('../components/app-savedlist.js');
-
-var Router = require('react-router');
-var Link = Router.Link;
-var RouteHandler = Router.RouteHandler;
+var Router = require('react-router'),
+ 	Link = Router.Link,
+	RouteHandler = Router.RouteHandler;
 
 
 var App = React.createClass({
@@ -34,3 +31,4 @@ var App = React.createClass({
 })
 
 module.exports = App;
+

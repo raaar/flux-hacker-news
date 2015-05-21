@@ -1,12 +1,9 @@
 /** @jsx React.DOM */
 var React = require('react'),
 	AppStore = require('../stores/app-store.js'),
-	RemoveFromCart = require('../components/app-removefromcart.js');
+	ListItem = require('../components/app-listitem.js'),
+ 	StoreWatchMixin = require('../mixins/StoreWatchMixin.js');
 
-var StoreWatchMixin = require('../mixins/StoreWatchMixin.js');
-
-
-var ListItem = require('../components/app-listitem.js');
 var pageName = 'topstories'; 
 
 function items(){

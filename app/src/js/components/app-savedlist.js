@@ -1,12 +1,9 @@
 /** @jsx React.DOM */
 var React = require('react'),
 	AppStore = require('../stores/app-store.js'),
-	RemoveFromCart = require('../components/app-removefromcart.js');
+	ListItem = require('../components/app-listitem.js'),
+	StoreWatchMixin = require('../mixins/StoreWatchMixin.js');
 
-var StoreWatchMixin = require('../mixins/StoreWatchMixin.js');
-
-
-var ListItem = require('../components/app-listitem.js');
 var pageName = 'favourites'; 
 
 function items(){
@@ -15,20 +12,6 @@ function items(){
 
 var SavedList = React.createClass({
 	mixins:[StoreWatchMixin(items)],
-	/*
-	getInitialState: function(){
-		return items();
-	},
-	componentWillMount: function(){
-		AppStore.addChangeListener(this._onChange)
-	},
-    componentWillUnmount:function(){
-      AppStore.removeChangeListener(this._onChange)
-    },
-	_onChange: function(){
-		this.setState(items());
-	},
-	*/
 
 	render: function(){
 		var listType = pageName;

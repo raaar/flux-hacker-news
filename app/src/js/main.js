@@ -1,23 +1,11 @@
 /** @jsx React.DOM */
-var React = require('react');
-var App = require('./components/App');
-
-var Router = require('react-router');
-var routes = require('./routes.js')
-
-
-
+var React = require('react'),
+ 	App = require('./components/App'),
+	Router = require('react-router'),
+ 	routes = require('./routes.js');
 
 Router.run(routes, function (Handler) {
   React.render(<Handler/>, document.body);
 });
 
 
-
-
-/*
-React.render(
-  <App />,
-  document.getElementById('app'));
-
-*/

@@ -1,7 +1,6 @@
 var AppConstants = require('../constants/app-constants.js'),
 	AppDispatcher = require('../dispatchers/app-dispatcher.js');
 
-
 var	AppActions = {
 	addItem: function(item){
 		//console.log(item.id)
@@ -15,16 +14,7 @@ var	AppActions = {
 			actionType: AppConstants.REMOVE_ITEM,
 			item: item
 		})
-	},
-
-	urlChange: function(path){
-		AppDispatcher.handleViewAction({
-			actionType: AppConstants.URL_CHANGE,
-			path: path
-		})
 	}
-
-
 }
 
 module.exports = AppActions;

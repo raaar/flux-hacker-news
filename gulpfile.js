@@ -10,8 +10,9 @@ var gulp = require('gulp'),
 gulp.task('browserify', function() {
   gulp.src('./app/src/js/main.js')
       .pipe(browserify({ transform: 'reactify' }))
+      .pipe(uglyfy())
       .pipe(gulp.dest('./app/dist/js'));
-
+      
       //.pipe(uglyfy());
 });
 
