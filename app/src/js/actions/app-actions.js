@@ -4,24 +4,27 @@ var AppConstants = require('../constants/app-constants.js'),
 
 var	AppActions = {
 	addItem: function(item){
-		console.log(item.id)
+		//console.log(item.id)
 		AppDispatcher.handleViewAction({
 			actionType: AppConstants.ADD_ITEM,
 			item: item
 		})
 	},
-	removeItem: function(index){
+	removeItem: function(item){
 		AppDispatcher.handleViewAction({
 			actionType: AppConstants.REMOVE_ITEM,
-			index: index
+			item: item
 		})
 	},
-	userAuthenticated: function(person) {
-	    AppDispatcher.handleViewAction({
-	      actionType: YoConstants.YO_USER_AUTHENTICATED,
-	      item: item
-	    });
-	},
+
+	urlChange: function(path){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.URL_CHANGE,
+			path: path
+		})
+	}
+
+
 }
 
 module.exports = AppActions;

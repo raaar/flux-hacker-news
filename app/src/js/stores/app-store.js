@@ -10,9 +10,14 @@ var CHANGE_EVENT = "change";
 
 
 
+var Router = require('react-router');
 
 
-
+var _path = Router.HashLocation.getCurrentPath();
+window.onhashchange = function(){
+    _path = Router.HashLocation.getCurrentPath();
+    AppStore.emitChange()
+};
 
 
 
@@ -21,8 +26,12 @@ var storyCount = 35;
 var fb ='https://hacker-news.firebaseio.com/v0/';
 var topstories =  new Firebase( fb + 'topstories');
 var _stories = [];
-var _saved = JSON.parse(localStorage.savedStorage);
 
+if(localStorage.savedStorage){
+    var _saved = JSON.parse(localStorage.savedStorage);
+} else {
+    var _saved = [];
+}
 /*
 var loadSaved = function(){
     if(localStorage.favouritesStorage){ 
@@ -72,15 +81,6 @@ getData();
 
 
 
-
-
-
-
-
-
-
-
-
 var _catalog = [
     {id:1, title: 'Widget #1', cost: 1},
     {id:2, title: 'Widget #2', cost: 2},
@@ -91,11 +91,6 @@ var _cartItems = [];
 
 
 
-
-function _removeItem(index){
-  _cartItems[index].inCart = false;
-  _cartItems.splice(index, 1);
-}
 
 function _increaseItem(index){
   _cartItems[index].qty++;
@@ -120,6 +115,33 @@ function _addItem(item){
     localStorage.setItem('savedStorage', JSON.stringify(_saved))
 }
 
+
+console.log(_saved)
+
+function _removeItem(item){
+
+    var arrayFavourites = _saved;
+
+    var removed = _.remove(arrayFavourites, item)
+
+    _saved = arrayFavourites;
+
+    //console.log(arrayFavourites)
+    
+    //_saved = newFavourites;
+
+    localStorage.setItem('favouritesStorage', JSON.stringify(arrayFavourites))    
+
+    AppStore.emitChange();  
+}
+
+
+
+var _path = Router.HashLocation.getCurrentPath();;
+function _urlChange(path){
+    _path = Router.HashLocation.getCurrentPath();
+    AppStore.emitChange()
+}
 
 
 			   
@@ -151,7 +173,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
     return _saved
   },
 
-
+  getPath: function(){
+    return _path;
+  },
 
   dispatcherIndex:AppDispatcher.register(function(payload){
     var action = payload.action; // this is our action from handleViewAction
@@ -161,7 +185,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
         break;
 
       case AppConstants.REMOVE_ITEM:
-        _removeItem(payload.action.index);
+        _removeItem(payload.action.item);
         break;
 
       case AppConstants.INCREASE_ITEM:
@@ -171,6 +195,11 @@ var AppStore = assign({}, EventEmitter.prototype, {
       case AppConstants.DECREASE_ITEM:
         _decreaseItem(payload.action.index);
         break;
+
+      case AppConstants.URL_CHANGE:
+        _urlChange(payload.action.path);
+        break;
+
     }
     AppStore.emitChange();
 

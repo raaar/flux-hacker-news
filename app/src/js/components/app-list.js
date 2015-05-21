@@ -3,28 +3,24 @@ var React = require('react'),
 	AppStore = require('../stores/app-store.js'),
 	RemoveFromCart = require('../components/app-removefromcart.js');
 
+var StoreWatchMixin = require('../mixins/StoreWatchMixin.js');
+
+
 var ListItem = require('../components/app-listitem.js');
+var pageName = 'topstories'; 
 
-
-function cartItems(){
+function items(){
 	return {items: AppStore.getStories()}
 }
 
+var SavedList = React.createClass({
+	mixins:[StoreWatchMixin(items)],
 
-var List = React.createClass({
-	getInitialState: function(){
-		return cartItems();
-	},
-	componentWillMount: function(){
-		AppStore.addChangeListener(this._onChange)
-	},
-	_onChange: function(){
-		this.setState(cartItems())
-	},
 	render: function(){
+		var listType = pageName;
 		var items = this.state.items.map(function(item, i){
 		return (
-				<ListItem item={item} key={i}/>	
+				<ListItem item={item} key={i} listType={listType}/>	
 			)
 		})
 		
@@ -36,4 +32,4 @@ var List = React.createClass({
 	}
 })
 
-module.exports = List;
+module.exports = SavedList;

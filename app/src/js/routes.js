@@ -13,7 +13,7 @@ var RouteHandler = Router.RouteHandler;
 
 var routes = (
   <Route name="app" path="/" handler={App}>
-    <Route name="home" handler={List}/>
+    <Route name="home" path="/" handler={List}/>
     <Route name="saved" handler={SavedList}/>
     <DefaultRoute handler={List}/>
   </Route>

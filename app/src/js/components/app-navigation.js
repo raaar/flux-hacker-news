@@ -13,10 +13,9 @@ var Link = Router.Link;
 
 
 var Navigation = React.createClass({
-	mixins: [ Router.State ],
-
 
 	render: function(){
+
 
 		return (
 			<nav>

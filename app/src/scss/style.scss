@@ -188,6 +188,7 @@ nav {
 	}
 	&.removed {
 		transition: none;
+		//background: salmon;
 	}
 	&.expanded {
 		right: 40%;

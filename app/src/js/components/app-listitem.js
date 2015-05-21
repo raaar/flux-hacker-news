@@ -8,10 +8,18 @@ var ListItem = React.createClass({
 
 	editFavourites: function(e){
 		e.preventDefault();
-		AppActions.addItem(this.props.item);
+		var item = this.refs.item.getDOMNode();
+
+		if (this.props.listType === 'topstories'){
+			AppActions.addItem(this.props.item);
+			item.setAttribute('class', 'item-inner saved');			
+		} else {
+			AppActions.removeItem(this.props.item);
+			item.setAttribute('class', 'item-inner removed');
+		}
+
 	},
 	
-
 	parseUrl: function(url){
 		var r = /:\/\/(.[^/]+)/;
 		var parsedURL;
@@ -46,7 +54,7 @@ var ListItem = React.createClass({
 
 	render: function(){
 		return (
-			<li className="topstories">
+			<li className={this.props.listType}>
 				<div ref="item" className="item-inner" >
 					<h3>{this.props.item.title}</h3>
 					<p>{this.parseUrl(this.props.item.url)}</p>
