@@ -25,6 +25,7 @@
   ],
   "devDependencies": {
     "normalize.css": "~3.0.3",
-    "hammer.js": "~2.0.4"
+    "hammer.js": "~2.0.4",
+    "sass-css3-mixins": "*"
   }
 }
